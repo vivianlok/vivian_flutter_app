@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "281754038964",
+    "project_id": "coffeeappflutter",
+    "storage_bucket": "coffeeappflutter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:281754038964:android:98c054ebdcadc3ac95dde1",
+        "android_client_info": {
+          "package_name": "com.vivian_flutter_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "281754038964-907s5sj88dkt7cl6uq8cbu6b9gb5nq6g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1-OEhPNxoaQGBA1VWxxnMik9wZ50C46w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "281754038964-907s5sj88dkt7cl6uq8cbu6b9gb5nq6g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
