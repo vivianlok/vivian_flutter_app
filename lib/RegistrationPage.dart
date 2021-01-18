@@ -158,16 +158,26 @@ class _registrationPageState extends State<RegistrationPage> {
                               style: TextStyle(color: Colors.white),
                             ),
                             onPressed: () {
-                              setState(() {
-                                progressIndicatorValue = true;
-                                registerButtonShowValue = false;
-                              });
 
-                              firebaseAuth
-                                  .createUserWithEmailAndPassword(
-                                      email: emailAddressTC.text,
-                                      password: passwordTC.text)
-                                  .whenComplete(() => goToHomePage());
+                              if(emailAddressTC.text.length == 0
+                              || passwordTC.text.length == 0){
+
+                                Fluttertoast.showToast(msg: "Please enter your email or password",
+
+                                toastLength: Toast.LENGTH_SHORT,
+                                timeInSecForIosWeb: 1);
+                              } else {
+                                setState(() {
+                                  progressIndicatorValue = true;
+                                  registerButtonShowValue = false;
+                                });
+
+                                firebaseAuth
+                                    .createUserWithEmailAndPassword(
+                                    email: emailAddressTC.text,
+                                    password: passwordTC.text)
+                                    .whenComplete(() => goToHomePage());
+                              }
                             },
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20.0)),

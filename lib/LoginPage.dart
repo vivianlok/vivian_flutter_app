@@ -19,6 +19,8 @@ class _loginPageState extends State<LoginPage> {
 
   bool progressIndicatorValue = false;
   bool loginButtonShowValue = true;
+  bool mainLoginImageShowValue = true;
+  bool deliveryGifShowValue = false;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,11 @@ class _loginPageState extends State<LoginPage> {
         child: Container(
           margin: EdgeInsets.all(12.0),
           child: ListView(
-            children: <Widget>[addImage(), addCard(), addRegistrationBtn()],
+            children: <Widget>[
+              addImage(),
+              addDeliveryAnimationImage(),
+              addCard(),
+              addRegistrationBtn()],
           ),
         ),
       ),
@@ -38,11 +44,31 @@ class _loginPageState extends State<LoginPage> {
   }
 
   Widget addImage() {
-    return Image.asset(
-      "images/login.png",
-      width: 200.0,
-      height: 200.0,
+    return Visibility(
+
+      visible: mainLoginImageShowValue,
+
+      child: Image.asset(
+        "images/login.png",
+        width: 200.0,
+        height: 200.0,
+      ),
     );
+  }
+
+  Widget addDeliveryAnimationImage() {
+
+    return Visibility(
+      visible: deliveryGifShowValue,
+
+      child: Image.asset("images/delivery_animation.gif",
+        width: 200.0,
+        height: 200.0,
+
+      ),
+    );
+
+
   }
 
   Widget addCard() {
@@ -123,15 +149,26 @@ class _loginPageState extends State<LoginPage> {
                         style: TextStyle(color: Colors.white),
                       ),
                       onPressed: () {
-                        setState(() {
-                          progressIndicatorValue = true;
-                          loginButtonShowValue = false;
-                        });
-                        firebaseAuth
-                            .signInWithEmailAndPassword(
-                                email: emailAddressTC.text,
-                                password: passwordTC.text)
-                            .whenComplete(() => goToHomepage());
+
+                        if(emailAddressTC.text.length==0 || passwordTC.text.length==0){
+                          Fluttertoast.showToast(msg: "Please enter your email and password",
+                              toastLength:  Toast.LENGTH_SHORT,
+                              timeInSecForIosWeb: 1);
+                        }
+                        else {
+                          setState(() {
+                            progressIndicatorValue = true;
+                            loginButtonShowValue = false;
+                            mainLoginImageShowValue = false;
+                            deliveryGifShowValue = true;
+                          });
+                          firebaseAuth
+                              .signInWithEmailAndPassword(
+                              email: emailAddressTC.text,
+                              password: passwordTC.text)
+                              .whenComplete(() => goToHomepage());
+                        }
+
                       },
                     ),
                   ),
@@ -166,4 +203,6 @@ class _loginPageState extends State<LoginPage> {
         toastLength: Toast.LENGTH_SHORT,
         timeInSecForIosWeb: 1);
   }
+
+
 }
